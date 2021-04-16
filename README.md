@@ -1,2 +1,2 @@
 # chrome-forensics
-Tools for Chrome browser forensics
+Tools to explore Chrome SQLite databases
