@@ -2,6 +2,31 @@
 Python scripts to interact with and extract data from Google Chrome's SQLite databases
 
 
+## Installation
+
+```
+pip3 install -r requirements.txt
+```
+
+## Usage
+
+
+### References
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### sqlacodegen
 ```
 sudo sqlacodegen "sqlite:////home/kali/.config/google-chrome/Default/History" > db_tables.py
