@@ -137,12 +137,12 @@ def console_print(df, headers):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(usage='python3 chrome_history.py CHROME_HISTORY_DB')
-    parser.add_argument('chrome_history_db', type=str, metavar='CHROME_HISTORY_DB', help='specify path to Chrome History database')
-    parser.add_argument('-l', '--logs', action='store_true', help='Fetch all webpage visits from History db')
-    parser.add_argument('-s', '--summary', action='store_true', help='Fetch summary metrics for each url in History db')
-    parser.add_argument('-o', '--outfile', action='store_true', help='output data to csv file saved in cwd')
-    parser.add_argument('-op', '--outfilepath', type=str, help='output data to csv file saved in specified path')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('chrome_history_db', type=str, metavar='CHROME_HISTORY_DB', help='path of Chrome History database')
+    parser.add_argument('-l', '--logs', action='store_true', help='gather historical webpage visits stored in History database')
+    parser.add_argument('-s', '--summary', action='store_true', help='gather summary metrics for every url in History database')
+    parser.add_argument('-o', '--outfile', action='store_true', help='output data to csv file (saved in cwd)')
+    parser.add_argument('-op', '--outfilepath', help='output data to csv file (saved in specified path)', type=str)
 
     args = parser.parse_args()
     chrome_history_db = args.chrome_history_db
