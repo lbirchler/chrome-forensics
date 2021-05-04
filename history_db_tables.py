@@ -3,6 +3,7 @@ from sqlalchemy import Boolean, Column, Index, Integer, LargeBinary, String, Tab
 from sqlalchemy.sql.sqltypes import NullType
 from sqlalchemy.ext.declarative import declarative_base
 
+# sudo sqlacodegen sqlite:////home/$USER/.config/google-chrome/Default/History > history_db_tables.py
 
 Base = declarative_base()
 metadata = Base.metadata
