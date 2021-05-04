@@ -7,8 +7,8 @@ import datetime
 import os
 import numpy as np
 import argparse
-from tabulate import tabulate
 from columnar import columnar
+
 
 def start_session(engine):
     Session = sessionmaker(bind=engine)
@@ -17,7 +17,6 @@ def start_session(engine):
 
 
 # transition type lookup table
-# https://chromium.googlesource.com/chromium/+/trunk/content/public/common/page_transition_types.h
 transition_df = pd.DataFrame({
     "transition": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     "transition_desc": ['LINK', 'TYPED', 'AUTO_BOOKMARK', 'AUTO_SUBFRAME',
@@ -30,6 +29,7 @@ def fetch_history_logs(db_engine):
     """
     fetch all webpage visits from the History database 
     """
+
     session = start_session(engine = db_engine)
     
     # url for from_visit id listed in visit table
@@ -79,6 +79,7 @@ def fetch_history_summary(db_engine):
     """
     fetch summary metrics for each url in History database
     """
+
     session = start_session(engine=db_engine)
     
     # first visit timestamp for each url
@@ -120,6 +121,7 @@ def console_print(df, headers):
     """
     print every 5 rows of query
     """
+    
     size = 5
     df_list = [df.loc[x:x+size-1,:] for x in range(0, len(df), size)]
     n = 0
