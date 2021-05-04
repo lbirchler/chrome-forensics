@@ -39,10 +39,10 @@ optional arguments:
 
 ## Examples
 
-**Note:** If no output flag is provided the results will displayed in the console - every 5 lines (press enter to display next 5 lines, any other character to escape)
+**Note:** If no output flag is provided the results will be displayed in the console - every 5 lines (press enter to display next 5 lines, any other character to escape)
 
 
-### History
+### History Logs
 
 ```bash
 $ python3 chrome_history.py /home/$USER/.config/google-chrome/Default/History -l
@@ -70,7 +70,7 @@ $ python3 chrome_history.py /home/$USER/.config/google-chrome/Default/History -l
 ```
 
 
-### Summary
+### History Summary
 
 ```bash
 $ python3 chrome_history.py /home/$USER/.config/google-chrome/Default/History -s
