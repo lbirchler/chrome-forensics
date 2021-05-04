@@ -39,7 +39,9 @@ optional arguments:
 
 ## Examples
 
-**Note:** If no output flag is provided the results will be displayed in the console - every 5 lines (press enter to display next 5 lines, any other character to escape)
+**To Note:** 
+- If no output flag is provided the results will be displayed in the console - every 5 lines (press enter to display next 5 lines, any other character to escape)
+- Make sure Chrome is closed before executing the script. You'll receive the following error if its still running, `sqlite3.OperationalError: database is locked`
 
 
 ### History Logs
