@@ -7,7 +7,8 @@ import datetime
 import os
 import numpy as np
 import argparse
-
+from tabulate import tabulate
+from columnar import columnar
 
 def start_session(engine):
     Session = sessionmaker(bind=engine)
@@ -115,30 +116,73 @@ def fetch_history_summary(db_engine):
     return df
 
 
+def console_print(df, headers):
+    """
+    print every 15 rows of query
+    """
+    size = 15
+    df_list = [df.loc[x:x+size-1,:] for x in range(0, len(df), size)]
+    n = 0
+    l = len(df_list)
+    while n <= l-1:
+        print('')
+        col_df = df_list[n]
+        col_df = col_df.values.tolist()
+        print(columnar(col_df, headers=headers))
+        print('')
+        additional = str(input('...')) # print next 15 lines
+        n += 1
+        if additional != '':
+            break
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(usage='python3 chrome_history.py CHROME_HISTORY_DB')
     parser.add_argument('chrome_history_db', type=str, metavar='CHROME_HISTORY_DB', help='specify path to Chrome History database')
     parser.add_argument('-l', '--logs', action='store_true', help='Fetch all webpage visits from History db')
     parser.add_argument('-s', '--summary', action='store_true', help='Fetch summary metrics for each url in History db')
-
+    parser.add_argument('-o', '--outfile', action='store_true', help='output data to csv file saved in cwd')
+    parser.add_argument('-op', '--outfilepath', type=str, help='output data to csv file saved in specified path')
 
     args = parser.parse_args()
     chrome_history_db = args.chrome_history_db
     logs = args.logs
     summary = args.summary
+    outfile = args.outfile
+    outfilepath = args.outfilepath
 
     if os.path.isfile(chrome_history_db):
-        db_path = chrome_history_db
-        engine = create_engine(rf'sqlite:///{db_path}')
-        if logs:
-            df = fetch_history_logs(db_engine=engine)
-            print(df.head())
-        if summary:
-            df = fetch_history_summary(db_engine=engine)
-            print(df.head())
+        db_path = chrome_history_db     
     else:
         print(f'\n[!] Unable to find History database: {chrome_history_db}')
-        
+
+    engine = create_engine(rf'sqlite:///{db_path}')
+
+    if logs:
+        df = fetch_history_logs(db_engine=engine)
+        header = '\n[+] Chrome History Logs:'
+        col_names = ['visit_time_utc', 'visit_duration_min', 'title', 'url', 'url_id', 'transition', 'transition_desc', 'from_url']
+        file_name = 'out_chrome_history_logs.csv'
+
+    if summary:
+        df = fetch_history_summary(db_engine=engine)
+        header = '\n[+] Chrome History Summary:'
+        col_names = ['url_id', 'title', 'url', 'visit_count', 'typed_count', 'hidden', 'first_visit_time', 'last_visit_time']
+        file_name = 'out_chrome_history_summary.csv'
+    
+    if outfile:
+        path = f'{os.getcwd()}/{file_name}'
+        df.to_csv(path, index=False, encoding='utf-8')
+        print(f'\n[+] CSV saved to: {path}\n')
+    elif outfilepath:
+        path = outfilepath
+        df.to_csv(path, index=False, encoding='utf-8')
+        print(f'\n[+] CSV saved to: {path}\n')
+    else:
+        print(header)
+        console_print(df=df, headers = col_names)
+
+
     
     
     
