@@ -1,5 +1,6 @@
 # chrome-forensics
-Tools to explore Chrome SQLite databases
+Python scripts to interact with and extract data from Google Chrome's SQLite databases
+
 
 ### sqlacodegen
 ```
