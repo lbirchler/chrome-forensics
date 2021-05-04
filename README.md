@@ -1,12 +1,15 @@
 # chrome-forensics
 Python scripts to interact with and extract data from Google Chrome's SQLite databases
 
+---
 
 ## Installation
 
 ```
 pip3 install -r requirements.txt
 ```
+
+---
 
 ## Usage
 
@@ -26,19 +29,23 @@ optional arguments:
 ```
 ### Location of Google Chrome history database
 
-- **Linux**: /home/USERNAME/.config/google-chrome/Default/History
+- **Linux**: /home/$USER/.config/google-chrome/Default/History
 
-- **Mac**: /Users/USERNAME/Library/Application Support/Google/Chrome/Default/History
+- **Mac**: /Users/$USER/Library/Application Support/Google/Chrome/Default/History
 
-- **Windows**: C:\Users\USERNAME\AppData\Local\Google\Chrome\User Data\Default\History
+- **Windows**: C:\Users\$USER\AppData\Local\Google\Chrome\User Data\Default\History
 
-
-
+---
 
 ## Examples
 
+**Note:** If no output flag is provided the results will displayed in the console - every 5 lines (press enter to display next 5 lines, any other character to escape)
+
+
+### History
+
 ```bash
-$ python3 chrome-forensics/chrome_history.py '/home/kali/.config/google-chrome/Default/History' -l
+$ python3 chrome_history.py /home/$USER/.config/google-chrome/Default/History -l
 
 [+] Chrome History Logs:
 
@@ -60,11 +67,54 @@ $ python3 chrome-forensics/chrome_history.py '/home/kali/.config/google-chrome/D
 
 ...
 
+```
 
 
+### Summary
+
+```bash
+$ python3 chrome_history.py /home/$USER/.config/google-chrome/Default/History -s
+
+[+] Chrome History Summary:
+
+|------|---------------------------------------------------|---------------------------------------------------|-----------|-----------|------|--------------------------|--------------------------|
+|url_id|title                                              |url                                                |visit_count|typed_count|hidden|first_visit_time          |last_visit_time           |
+|===================================================================================================================================================================================================|
+|6     |GitHub - psf/requests: A simple, yet elegant HTTP l|https://github.com/psf/requests                    |2          |0          |0     |2021-05-04 10:40:49.350410|2021-05-04 10:41:03.979415|
+|      |ibrary.                                            |                                                   |           |           |      |                          |                          |
+|------|---------------------------------------------------|---------------------------------------------------|-----------|-----------|------|--------------------------|--------------------------|
+|7     |Issues · psf/requests · GitHub                     |https://github.com/psf/requests/issues             |2          |0          |0     |2021-05-04 10:41:04.021337|2021-05-04 10:41:04.467752|
+|------|---------------------------------------------------|---------------------------------------------------|-----------|-----------|------|--------------------------|--------------------------|
+|8     |python - Google Search                             |https://www.google.com/search?q=python&oq=python&aq|2          |0          |0     |2021-05-04 10:41:22.615857|2021-05-04 10:41:23.529702|
+|      |                                                   |s=chrome..69i57j46i433j0i433l3j0j0i433l3j0.1332j0j7|           |           |      |                          |                          |
+|      |                                                   |&sourceid=chrome&ie=UTF-8                          |           |           |      |                          |                          |
+|------|---------------------------------------------------|---------------------------------------------------|-----------|-----------|------|--------------------------|--------------------------|
+|13    |Functional Programming HOWTO — Python 3.9.5 documen|https://docs.python.org/3/howto/functional.html    |1          |0          |0     |2021-05-04 10:41:55.436107|2021-05-04 10:41:55.436107|
+|      |tation                                             |                                                   |           |           |      |                          |                          |
+|------|---------------------------------------------------|---------------------------------------------------|-----------|-----------|------|--------------------------|--------------------------|
+|12    |Python HOWTOs — Python 3.9.5 documentation         |https://docs.python.org/3/howto/index.html         |1          |0          |0     |2021-05-04 10:41:53.161687|2021-05-04 10:41:53.161687|
+|------|---------------------------------------------------|---------------------------------------------------|-----------|-----------|------|--------------------------|--------------------------|
+
+...
+
+```
+
+### Output File
+
+```bash
+$ python3 chrome_history.py /home/$USER/.config/google-chrome/Default/History -l -op ~/Desktop/chrome_history_out.csv
+
+[+] CSV saved to: /home/$USER/Desktop/chrome_history_out.csv
+
+```
+
+---
 
 ### References
 
+- https://www.sans.org/blog/google-chrome-forensics/
+- https://chromium.googlesource.com/chromium/+/trunk/content/public/common/page_transition_types.h
+- https://www.dfir.training/infographics-cheats/210-evolution-of-chrome-databases-v35/file
 
 
 
@@ -79,8 +129,11 @@ $ python3 chrome-forensics/chrome_history.py '/home/kali/.config/google-chrome/D
 
 
 
-### sqlacodegen
+
+
+
+<!-- ### sqlacodegen
 ```
 sudo sqlacodegen "sqlite:////home/kali/.config/google-chrome/Default/History" > db_tables.py
-```
+``` -->
 
