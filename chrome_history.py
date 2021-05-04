@@ -118,9 +118,9 @@ def fetch_history_summary(db_engine):
 
 def console_print(df, headers):
     """
-    print every 15 rows of query
+    print every 5 rows of query
     """
-    size = 15
+    size = 5
     df_list = [df.loc[x:x+size-1,:] for x in range(0, len(df), size)]
     n = 0
     l = len(df_list)
