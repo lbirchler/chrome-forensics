@@ -33,7 +33,7 @@ optional arguments:
 
 - **Mac**: /Users/<username>/Library/Application Support/Google/Chrome/Default/History
 
-- **Windows**: C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\History
+- **Windows**: 'C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\History'
 
 ---
 
