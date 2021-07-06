@@ -1,6 +1,6 @@
 # chrome-forensics
 
-script to extract browsing history data from Google Chrome's SQLite databases
+script to extract browser history data from Google Chrome's SQLite databases
 
 ---
 
