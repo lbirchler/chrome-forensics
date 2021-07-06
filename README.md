@@ -1,5 +1,6 @@
 # chrome-forensics
-Python scripts to interact with and extract data from Google Chrome's SQLite databases
+
+script to extract browsing history data from Google Chrome's SQLite databases
 
 ---
 
